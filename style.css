@@ -1,0 +1,143 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+a {
+    color: #0077b6; text-decoration: none;
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background: #336633;
+    width: 100vh;
+    height: 100vh;
+}
+
+.search-app {
+    position: absolute;
+    top: 10%;
+    left: 25%;
+}
+
+.search {
+    padding: 10px 0 10px 10px;
+    margin: 0;
+    width: 500px;
+    height: 50px;
+    line-height: 30px;
+    appearance: none;
+    color: rgba(0, 0, 0, 0.66);
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: -7px 5px 0 0 black;
+    transition: box-shadow 200ms,
+    transform 200ms;
+}
+
+.search:focus {
+    outline: none;
+    transform: translate(-7px, 5px);
+    box-shadow: none;
+}
+
+.search::placeholder {
+    color: gray;
+    opacity: 0.5;
+    padding: 0;
+    margin: 0;
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 400;
+    transition: color 150ms;
+}
+
+.search:focus::placeholder {
+    color: transparent;
+}
+
+.search-dropdown {
+    padding-left: 6px;
+}
+
+.search-results {
+    top: 100%;
+    left: 0;
+    padding-left: 6px;
+    width: 400px;
+    background-color: rgb(255, 255, 255, 0.3);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    transform: translate(-5px,3px);
+    z-index: -1;
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-results li {
+    padding-top: 2px;
+    height: 22px;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.search-results li:hover {
+    background-color: rgba(241, 241, 241, 0.41);
+}
+
+.added-reps {
+    width: 450px;
+    position: absolute;
+    left: 20%;
+    top: 40%;
+    padding: 16px 0px 16px 16px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.66);
+    box-shadow: -7px 5px 0 0 black;
+}
+
+.reps-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.reps-list li {
+    height: 52px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 6px 0 6px 0;
+}
+
+.reps-list li button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.reps-list li button:hover {
+    background-color: #c82333;
+}

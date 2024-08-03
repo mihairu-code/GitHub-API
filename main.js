@@ -1,12 +1,8 @@
-// Получение элементов DOM
 const mainInput = document.getElementById('main-input');
 const searchResults = document.querySelector('.search-results');
 const addedRepsList = document.querySelector('.reps-list');
-
-// Ключевые элементы
 let repos = [];
 
-// Функция для получения списка репозиториев от GitHub API
 async function getRepositories(query) {
     try {
         const response = await fetch(`https://api.github.com/search/repositories?q=${query}&per_page=5`, {
@@ -22,13 +18,12 @@ async function getRepositories(query) {
     }
 }
 
-// Функция для отображения результатов поиска в выпадающем меню
 async function displaySearchResults() {
     const query = mainInput.value;
     const repositories = await getRepositories(query);
 
     searchResults.innerHTML = '';
-    searchResults.style.display = 'block'; // Показываем выпадающее меню
+    searchResults.style.display = 'block';
 
     repositories.forEach((repo) => {
         const li = document.createElement('li');
@@ -42,7 +37,6 @@ async function displaySearchResults() {
     });
 }
 
-// Функция для добавления репозитория в список
 function addRepository(repo) {
     if (!repos.some((r) => r.id === repo.id)) {
         repos.push(repo);
@@ -50,7 +44,6 @@ function addRepository(repo) {
     }
 }
 
-// Функция для удаления репозитория из списка
 function removeRepository(repo) {
     const index = repos.findIndex((r) => r.id === repo.id);
     if (index !== -1) {
@@ -59,7 +52,6 @@ function removeRepository(repo) {
     }
 }
 
-// Функция для обновления списка добавленных репозиториев
 function updateAddedRepositoriesList() {
     addedRepsList.innerHTML = '';
 
@@ -80,7 +72,6 @@ function updateAddedRepositoriesList() {
     });
 }
 
-// Обработчик события ввода в основной input
 mainInput.addEventListener('input', () => {
     displaySearchResults();
 });

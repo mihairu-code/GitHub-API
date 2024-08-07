@@ -3,7 +3,23 @@ const searchResults = document.querySelector('.search-results');
 const addedRepsList = document.querySelector('.reps-list');
 let repos = [];
 
+let searchDebounceTimeout;
+let searchCache = {};
+
+function debounce(func, delay) {
+    return function (...args) {
+        clearTimeout(searchDebounceTimeout);
+        searchDebounceTimeout = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
 async function getRepositories(query) {
+    if (searchCache[query]) {
+        return searchCache[query];
+    }
+
     try {
         const response = await fetch(`https://api.github.com/search/repositories?q=${query}&per_page=5`, {
             headers: {
@@ -11,6 +27,7 @@ async function getRepositories(query) {
             }
         });
         const data = await response.json();
+        searchCache[query] = data.items;
         return data.items;
     } catch (error) {
         console.error('Ошибка при получении репозиториев:', error);
@@ -18,7 +35,7 @@ async function getRepositories(query) {
     }
 }
 
-async function displaySearchResults() {
+const displaySearchResults = debounce(async () => {
     const query = mainInput.value;
     const repositories = await getRepositories(query);
 
@@ -35,7 +52,7 @@ async function displaySearchResults() {
         });
         searchResults.appendChild(li);
     });
-}
+}, 500);
 
 function addRepository(repo) {
     if (!repos.some((r) => r.id === repo.id)) {
